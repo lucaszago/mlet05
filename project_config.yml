@@ -1,0 +1,35 @@
+prd:
+  catalog_name: mlops_prd
+  schema_name: finance
+  pipeline_id: 9b8df4fc-bfe1-4cc1-9534-e579a017629d
+acc:
+  catalog_name: mlops_acc
+  schema_name: finance
+  pipeline_id: 9b8df4fc-bfe1-4cc1-9534-e579a017629d
+dev:
+  catalog_name: mlops_dev
+  schema_name: finance
+  pipeline_id: 9b8df4fc-bfe1-4cc1-9534-e579a017629d
+
+
+experiment_name_basic: /Shared/finance-basic
+experiment_name_custom: /Shared/finance-custom
+experiment_name_fe: /Shared/finance-fe
+
+parameters:
+  SYMBOL: DIS
+  START_DATE: "2018-01-01"
+  END_DATE: "2024-07-20"
+  SEQUENCE_LENGTH: 60
+  TRAIN_RATIO: 0.8
+  EPOCHS: 100
+  BATCH_SIZE: 32
+
+
+num_features:
+  - Close
+
+
+cat_features: []
+ 
+target: Close
