@@ -25,7 +25,7 @@ Metricas principais a evidenciar na apresentacao:
 ## Como Validar No Databricks
 
 1. Abrir `Experiments` e procurar `/Shared/finance-basic`.
-2. Abrir a run gerada pelo job `112977968925212`.
+2. Abrir a run gerada pelo job `7043957383197`.
 3. Conferir metricas e artefatos.
 4. Abrir `Catalog > mlops_dev > finance > Models`.
 5. Conferir se `finance_lstm_model_basic` existe e possui alias `latest-model`.
