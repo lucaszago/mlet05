@@ -4,9 +4,9 @@
 
 - Repositorio: `https://github.com/lucaszago/mlet05`
 - Branch validada: `main`
-- Commit: `f14e2d1 fix: always run post commit status task`
+- Commit: `3620aa3 docs: add delivery evidence package`
 - Workflow: `ci`
-- Run: `25299693626`
+- Run: `25300132053`
 - Status: `success`
 - Data da evidencia: `2026-05-04`
 
@@ -31,13 +31,13 @@ A esteira esta definida em `.github/workflows/ci.yml` e cobre:
 
 ```bash
 gh run list --repo lucaszago/mlet05 --limit 5
-gh run view 25299693626 --repo lucaszago/mlet05
+gh run view 25300132053 --repo lucaszago/mlet05
 ```
 
 ## Evidencia Visual Recomendada
 
-Anexar print da run `25299693626` mostrando todos os steps concluidos com sucesso. Se usar screenshot no repo, salvar em:
+Anexar print da run `25300132053` mostrando todos os steps concluidos com sucesso. Se usar screenshot no repo, salvar em:
 
 ```text
-docs/evidence/images/github-actions-run-25299693626.png
+docs/evidence/images/github-actions-run-25300132053.png
 ```

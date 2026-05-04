@@ -7,10 +7,10 @@ Este diretorio consolida as evidencias operacionais da entrega MLET_TC05. Nao in
 | Item | Status | Evidencia |
 | --- | --- | --- |
 | Repositorio publico | OK | https://github.com/lucaszago/mlet05 |
-| Esteira GitHub Actions | OK | Run `25299693626`, status `success` |
+| Esteira GitHub Actions | OK | Run `25300132053`, status `success` |
 | Qualidade local | OK | `uv run ruff check .`, `uv run pytest`, `uv build` |
 | Databricks Bundle validate | OK | `databricks bundle validate -t dev --profile dbc-d3858b75-976f` |
-| Databricks Job | OK | Job `271536484960804`, run `375844195554899`, status `SUCCESS` |
+| Databricks Job | OK | Job `271536484960804`, run `112977968925212`, status `SUCCESS` |
 | MLflow Tracking | OK | Experimento `/Shared/finance-basic` |
 | Unity Catalog Model Registry | OK | Modelo `mlops_dev.finance.finance_lstm_model_basic`, alias `latest-model` |
 | API FastAPI | Pronto para demo | Endpoints `/health`, `/predict`, `/agent/ask` |
@@ -21,9 +21,9 @@ Este diretorio consolida as evidencias operacionais da entrega MLET_TC05. Nao in
 
 Salve imagens em `docs/evidence/images/` se quiser deixar os prints versionados no repo.
 
-1. Print da aba Actions do GitHub mostrando a run `25299693626` com status verde.
+1. Print da aba Actions do GitHub mostrando a run `25300132053` com status verde.
 2. Print dos detalhes da action mostrando `Lint`, `Test`, `Build`, `Validate Databricks bundle`, `Deploy Databricks bundle` e `Run Databricks workflow`.
-3. Print do Databricks Workflows mostrando o job `[dev lukaszago] MLET_TC05-workflow` com run `375844195554899` em `SUCCESS`.
+3. Print do Databricks Workflows mostrando o job `[dev lukaszago] MLET_TC05-workflow` com run `112977968925212` em `SUCCESS`.
 4. Print das tasks do job: `preprocessing`, `train_model`, `model_updated`, `deploy_model`, `post_commit_status`.
 5. Print do MLflow Experiments com metricas do treinamento.
 6. Print do Unity Catalog Model Registry mostrando o modelo `finance_lstm_model_basic` e o alias `latest-model`.
