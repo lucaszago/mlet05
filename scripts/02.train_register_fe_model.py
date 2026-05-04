@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import os
 from pathlib import Path
 
 import yaml
@@ -67,11 +66,9 @@ def set_task_value(spark, key: str, value: str) -> None:
 def main() -> None:
     """Train, log, and register the basic finance LSTM model."""
     args = parse_args()
-    os.environ.setdefault("DATABRICKS_CONFIG_PROFILE", args.env)
     config = ProjectConfig.from_yaml(str(resolve_config_path(args.root_path)), env=args.env)
     logger.info("Configuration loaded:")
     logger.info(yaml.dump(config.model_dump(mode="json"), default_flow_style=False))
-    logger.info("Using Databricks auth profile '{}'.", os.environ.get("DATABRICKS_CONFIG_PROFILE"))
 
     tags = Tags(git_sha=args.git_sha, branch=args.branch, job_run_id=args.job_run_id)
     logger.info("Creating Spark session...")

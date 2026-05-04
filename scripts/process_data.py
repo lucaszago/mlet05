@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import os
 from pathlib import Path
 
 import yaml
@@ -57,7 +56,6 @@ def flatten_yfinance_columns(pandas_df):
 def main() -> None:
     """Download market data, create sequences, and persist Delta train/test tables."""
     args = parse_args()
-    os.environ.setdefault("DATABRICKS_CONFIG_PROFILE", args.env)
     config = ProjectConfig.from_yaml(config_path=str(resolve_config_path(args.root_path)), env=args.env)
 
     logger.info("Configuration loaded:")

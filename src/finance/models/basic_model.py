@@ -173,7 +173,7 @@ class LSTMModel:
         databricks_host = os.getenv("DATABRICKS_HOST")
         databricks_profile = os.getenv("DATABRICKS_CONFIG_PROFILE")
 
-        if databricks_host:
+        if databricks_host or self._is_databricks_runtime():
             target_tracking_uri = "databricks"
             target_registry_uri = "databricks-uc"
         elif databricks_profile:
@@ -216,6 +216,17 @@ class LSTMModel:
     def _is_spark_connect_dataframe(dataframe: Any) -> bool:
         """Detect Spark Connect dataframes, which do not support MLflow dataset profiling."""
         return type(dataframe).__module__.startswith("pyspark.sql.connect.")
+
+    @staticmethod
+    def _is_databricks_runtime() -> bool:
+        """Detect execution inside a Databricks job/runtime without relying on local profiles."""
+        databricks_env_markers = (
+            "DATABRICKS_RUNTIME_VERSION",
+            "DATABRICKS_JOB_ID",
+            "DATABRICKS_CLUSTER_ID",
+            "DB_HOME",
+        )
+        return any(os.getenv(marker) for marker in databricks_env_markers)
 
     def _build_required_tags(self) -> dict[str, str]:
         """Build the required governance tags for MLflow runs and model versions."""
