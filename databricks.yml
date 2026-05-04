@@ -137,7 +137,6 @@ targets:
     mode: development
     workspace:
       host: https://dbc-d3858b75-976f.cloud.databricks.com/
-      profile: dbc-d3858b75-976f
       root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED
@@ -155,7 +154,6 @@ targets:
       name_prefix: 'test_'
     workspace:
       host: https://dbc-c2e8445d-159d.cloud.databricks.com
-      profile: dbc-c2e8445d-159d
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED
@@ -167,7 +165,6 @@ targets:
       name_prefix: 'acc_'
     workspace:
       host: https://dbc-ce72dccf-d4e6.cloud.databricks.com/
-      profile: dbc-ce72dccf-d4e6
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED
@@ -179,7 +176,6 @@ targets:
     mode: production
     workspace:
       host: https://dbc-b96aa43b-468e.cloud.databricks.com/
-      profile: dbc-b96aa43b-468e
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED # normally UNPAUSED
