@@ -88,6 +88,7 @@ databricks bundle validate -t dev
 - LGPD: `docs/LGPD_PLAN.md`
 - OWASP: `docs/OWASP_MAPPING.md`
 - Red Teaming: `docs/RED_TEAM_REPORT.md`
+- Evidências operacionais: `docs/evidence/README.md`
 
 ## Limitações Conhecidas
 
