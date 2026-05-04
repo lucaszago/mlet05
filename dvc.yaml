@@ -1,0 +1,10 @@
+stages:
+  data_ingestion:
+    cmd: uv run python scripts/process_data.py data_ingestion --env dev
+    deps:
+      - scripts/process_data.py
+      - src/finance/data_processor.py
+      - project_config.yml
+    outs:
+      - data/processed:
+          persist: true

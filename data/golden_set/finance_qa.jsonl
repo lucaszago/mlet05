@@ -1,0 +1,5 @@
+{"question": "Qual é o escopo do modelo financeiro?", "expected_keywords": ["LSTM", "preço de fechamento", "não é recomendação"]}
+{"question": "Como o pipeline MLOps registra o modelo?", "expected_keywords": ["MLflow", "Unity Catalog", "métricas"]}
+{"question": "Quando o drift é crítico?", "expected_keywords": ["PSI", "0.2", "crítico"]}
+{"question": "Quais cuidados LGPD existem?", "expected_keywords": ["dados públicos", "PII", "mascaramento"]}
+{"question": "Explique risco para preços 10 11 9 12", "expected_keywords": ["Volatilidade", "drawdown", "não é recomendação"]}

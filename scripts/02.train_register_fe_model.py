@@ -1,14 +1,12 @@
-# Databricks notebook source
-
 from __future__ import annotations
 
 import argparse
 import os
 from pathlib import Path
 
+import yaml
 from databricks.connect import DatabricksSession
 from loguru import logger
-import yaml
 
 from finance.config import ProjectConfig, Tags
 from finance.models.basic_model import BasicModel
@@ -32,9 +30,18 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
-def resolve_config_path() -> Path:
-    """Resolve the local project configuration file."""
-    return Path(__file__).resolve().parents[1] / "project_config.yml"
+def resolve_config_path(root_path: str = "") -> Path:
+    """Resolve the project configuration file in Databricks or locally."""
+    if root_path:
+        candidate = Path(root_path) / "files" / "project_config.yml"
+        if candidate.exists():
+            return candidate
+        return Path(root_path) / "project_config.yml"
+
+    if "__file__" in globals():
+        return Path(__file__).resolve().parents[1] / "project_config.yml"
+
+    return Path.cwd() / "project_config.yml"
 
 
 def get_spark():
@@ -61,7 +68,7 @@ def main() -> None:
     """Train, log, and register the basic finance LSTM model."""
     args = parse_args()
     os.environ.setdefault("DATABRICKS_CONFIG_PROFILE", args.env)
-    config = ProjectConfig.from_yaml(str(resolve_config_path()), env=args.env)
+    config = ProjectConfig.from_yaml(str(resolve_config_path(args.root_path)), env=args.env)
     logger.info("Configuration loaded:")
     logger.info(yaml.dump(config.model_dump(mode="json"), default_flow_style=False))
     logger.info("Using Databricks auth profile '{}'.", os.environ.get("DATABRICKS_CONFIG_PROFILE"))
@@ -88,5 +95,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-# COMMAND ----------

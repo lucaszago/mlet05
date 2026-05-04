@@ -42,16 +42,18 @@ resources:
         timezone_id: "Europe/Amsterdam"
         pause_status: ${var.schedule_pause_status}
       tags:
-        project_name: "house-price"
+        project_name: "finance-lstm"
       environments:
         - environment_key: "default"
           spec:
             environment_version: "2"
+            dependencies:
+              - ./dist/*.whl
       tasks:
         - task_key: "preprocessing"
           environment_key: "default"
           spark_python_task:
-            python_file: "scripts/01.process_data.py"
+            python_file: "scripts/process_data.py"
             parameters:
               - "data_ingestion"
               - "--root_path"
@@ -60,8 +62,6 @@ resources:
               - "${var.env}"
               - "--is_test"
               - "${var.is_test}"
-          libraries:
-           - whl: ./dist/*.whl
         - task_key: "train_model"
           environment_key: "default"
           depends_on:
@@ -82,8 +82,6 @@ resources:
               - "${var.branch}"
               - "--is_test"
               - "${var.is_test}"
-          libraries:
-            - whl: ./dist/*.whl
         - task_key: model_updated
           condition_task:
             op: "EQUAL_TO"
@@ -106,8 +104,6 @@ resources:
               - "${var.env}"
               - "--is_test"
               - "${var.is_test}"
-          libraries:
-            - whl: ./dist/*.whl
         - task_key: post_commit_status_required
           condition_task:
             op: "EQUAL_TO"
@@ -134,8 +130,6 @@ resources:
               - "${var.repo}"
               - "--org"
               - "${var.org}"
-          libraries:
-            - whl: ./dist/*.whl
 
 targets:
   dev:
@@ -143,6 +137,7 @@ targets:
     mode: development
     workspace:
       host: https://dbc-d3858b75-976f.cloud.databricks.com/
+      profile: dbc-d3858b75-976f
       root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED
@@ -160,6 +155,7 @@ targets:
       name_prefix: 'test_'
     workspace:
       host: https://dbc-c2e8445d-159d.cloud.databricks.com
+      profile: dbc-c2e8445d-159d
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED
@@ -171,6 +167,7 @@ targets:
       name_prefix: 'acc_'
     workspace:
       host: https://dbc-ce72dccf-d4e6.cloud.databricks.com/
+      profile: dbc-ce72dccf-d4e6
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED
@@ -182,6 +179,7 @@ targets:
     mode: production
     workspace:
       host: https://dbc-b96aa43b-468e.cloud.databricks.com/
+      profile: dbc-b96aa43b-468e
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
     variables:
       schedule_pause_status: PAUSED # normally UNPAUSED
