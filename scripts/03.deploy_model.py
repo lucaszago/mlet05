@@ -45,13 +45,23 @@ def resolve_config_path(root_path: str = "") -> Path:
 
 def configure_mlflow_registry(env: str) -> None:
     """Configure MLflow to use Databricks Unity Catalog when available."""
-    os.environ.setdefault("DATABRICKS_CONFIG_PROFILE", env)
-    if os.getenv("DATABRICKS_HOST"):
+    if os.getenv("DATABRICKS_HOST") or is_databricks_runtime():
         mlflow.set_tracking_uri("databricks")
         mlflow.set_registry_uri("databricks-uc")
     else:
         mlflow.set_tracking_uri(f"databricks://{env}")
         mlflow.set_registry_uri(f"databricks-uc://{env}")
+
+
+def is_databricks_runtime() -> bool:
+    """Detect execution inside a Databricks job/runtime without relying on local profiles."""
+    databricks_env_markers = (
+        "DATABRICKS_RUNTIME_VERSION",
+        "DATABRICKS_JOB_ID",
+        "DATABRICKS_CLUSTER_ID",
+        "DB_HOME",
+    )
+    return any(os.getenv(marker) for marker in databricks_env_markers)
 
 
 def main() -> None:
