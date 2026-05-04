@@ -13,10 +13,10 @@ variables:
     default: abcd
   repo:
     description: repo name
-    default: repo
+    default: mlet05
   org:
     description: GitHub organization
-    default: end-to-end-mlops-databricks-3
+    default: lucaszago
   branch:
     description: branch
     default: main
