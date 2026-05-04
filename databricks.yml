@@ -104,17 +104,9 @@ resources:
               - "${var.env}"
               - "--is_test"
               - "${var.is_test}"
-        - task_key: post_commit_status_required
-          condition_task:
-            op: "EQUAL_TO"
-            left: "${var.is_test}"
-            right: "1"
-          depends_on:
-            - task_key: "deploy_model"
         - task_key: "post_commit_status"
           depends_on:
-            - task_key: "post_commit_status_required"
-              outcome: "true"
+            - task_key: "deploy_model"
           environment_key: "default"
           spark_python_task:
             python_file: "scripts/04.post_commit_status.py"
