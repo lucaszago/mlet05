@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABRICKS_BUNDLE_ENV: dev
+      DATABRICKS_HOST: https://dbc-d3858b75-976f.cloud.databricks.com
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
@@ -28,20 +29,26 @@ jobs:
         run: uv build
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
+      - name: Check Databricks auth secret
+        env:
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          if [ -z "$DATABRICKS_TOKEN" ]; then
+            echo "Missing GitHub secret: DATABRICKS_TOKEN"
+            echo "Configure it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
       - name: Validate Databricks bundle
         env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: databricks bundle validate -t "$DATABRICKS_BUNDLE_ENV"
       - name: Deploy Databricks bundle
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: databricks bundle deploy -t "$DATABRICKS_BUNDLE_ENV"
       - name: Run Databricks workflow
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: databricks bundle run deployment -t "$DATABRICKS_BUNDLE_ENV"
