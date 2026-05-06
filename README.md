@@ -90,6 +90,17 @@ databricks bundle validate -t dev
 - Red Teaming: `docs/RED_TEAM_REPORT.md`
 - Evidências operacionais: `docs/evidence/README.md`
 
+### Execuções Comprovadas
+
+| Evidência | Arquivo |
+|-----------|---------|
+| Histórico de runs Mai 2026 (5/6 succeeded) | [DATABRICKS_WORKFLOW_RUNS.md](docs/evidence/DATABRICKS_WORKFLOW_RUNS.md) |
+| DAG completo — run 205087470861753 | [DATABRICKS_WORKFLOW_RUNS.md](docs/evidence/DATABRICKS_WORKFLOW_RUNS.md#dag--todas-as-tasks-concluídas) |
+| Output deploy_model + validação URI | [DATABRICKS_WORKFLOW_RUNS.md](docs/evidence/DATABRICKS_WORKFLOW_RUNS.md#output-da-task-deploy_model) |
+| Tabelas Delta no Unity Catalog | [DATABRICKS_WORKFLOW_RUNS.md](docs/evidence/DATABRICKS_WORKFLOW_RUNS.md#unity-catalog--tabelas-delta-geradas) |
+| CI/CD GitHub Actions | [GITHUB_ACTIONS.md](docs/evidence/GITHUB_ACTIONS.md) |
+| MLflow e Model Registry | [MLFLOW_AND_REGISTRY.md](docs/evidence/MLFLOW_AND_REGISTRY.md) |
+
 ## Limitações Conhecidas
 
 - O projeto atual usa dados públicos do `yfinance`, não dados reais da empresa convidada.

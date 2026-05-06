@@ -10,9 +10,12 @@ Este diretorio consolida as evidencias operacionais da entrega MLET_TC05. Nao in
 | Esteira GitHub Actions | OK | Run `25300452941`, status `success` |
 | Qualidade local | OK | `uv run ruff check .`, `uv run pytest`, `uv build` |
 | Databricks Bundle validate | OK | `databricks bundle validate -t dev --profile dbc-d3858b75-976f` |
-| Databricks Job | OK | Job `271536484960804`, run `7043957383197`, status `SUCCESS` |
+| Databricks Job (ultima run) | OK | Job `271536484960804`, run `205087470861753`, status `SUCCESS`, 8m 15s |
+| Databricks Job (historico) | OK | 5 de 6 execucoes bem-sucedidas em Mai 2026 — ver `DATABRICKS_WORKFLOW_RUNS.md` |
 | MLflow Tracking | OK | Experimento `/Shared/finance-basic` |
 | Unity Catalog Model Registry | OK | Modelo `mlops_dev.finance.finance_lstm_model_basic`, alias `latest-model` |
+| Unity Catalog Delta Tables | OK | `mlops_dev.finance.train_set` e `test_set` com Change Data Feed |
+| Deploy validado | OK | URI `models:/mlops_dev.finance.finance_lstm_model_basic@latest-model` carregada com sucesso |
 | API FastAPI | Pronto para demo | Endpoints `/health`, `/predict`, `/agent/ask` |
 | Agente financeiro | Pronto para demo | RAG local e tools auditaveis em `finance.agent` |
 | Governanca | OK | Model Card, System Card, LGPD, OWASP e Red Teaming em `docs/` |
@@ -33,7 +36,8 @@ Salve imagens em `docs/evidence/images/` se quiser deixar os prints versionados 
 ## Arquivos Deste Pacote
 
 - `GITHUB_ACTIONS.md`: evidencia da esteira CI/CD.
-- `DATABRICKS_JOB.md`: evidencia do workflow Databricks.
+- `DATABRICKS_JOB.md`: evidencia do workflow Databricks (referencia base).
+- `DATABRICKS_WORKFLOW_RUNS.md`: historico de execucoes Mai 2026, DAG completo, output deploy e tabelas Delta.
 - `MLFLOW_AND_REGISTRY.md`: evidencia de tracking e registro do modelo.
 - `API_AND_AGENT.md`: evidencia da API e do agente financeiro.
 - `LOCAL_VALIDATION.md`: comandos locais de validacao.
